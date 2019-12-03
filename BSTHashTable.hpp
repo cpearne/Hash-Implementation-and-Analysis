@@ -1,16 +1,24 @@
 #include <iostream>
 using namespace std;
 
+struct TreeNode{
+  int key;
+  TreeNode *left, *right, *parent;
+};
+
 class BSTHashTable{
   private:
     int TABLE_SIZE;
-    BST BSTHash;
+    TreeNode* root;
+    bool functone;
 
   public:
-    BSTHashTable();
+    BSTHashTable(int tableSize, bool hashFunction);
     ~BSTHashTable();
     int hashFunctOne(int key);
     int hashFunctTwo(int key);
     void printHashTable();
-    node *searchTable();
+    TreeNode* search(int key);
+    void insert(int key);
+    void delete(int key);
 };
