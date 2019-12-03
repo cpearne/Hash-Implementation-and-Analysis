@@ -18,7 +18,7 @@ class BSTHashTable{
     int hashFunctOne(int key);
     int hashFunctTwo(int key);
     void printHashTable();
-    TreeNode* search(int key);
-    void insert(int key);
-    void delete(int key);
+    TreeNode* searchTable(int key);
+    void insertNode(int key);
+    void deleteNode(int key);
 };
