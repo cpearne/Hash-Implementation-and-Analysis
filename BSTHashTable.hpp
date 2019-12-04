@@ -1,3 +1,5 @@
+#ifndef BST_Hashtable
+#define BST_Hashtable
 #include <iostream>
 using namespace std;
 
@@ -22,3 +24,5 @@ class BSTHashTable{
     void insertNode(int key);
     void deleteNode(int key);
 };
+
+#endif
