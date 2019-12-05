@@ -124,6 +124,7 @@ void LLHashTable::insertNode(node* previous, int key)
       curr->next = newNode;
     }
   }
+  keyCount++;
 }
 
 /*
@@ -182,4 +183,12 @@ void LLHashTable::deleteNode(int key)
       }
     }
   }
+  keyCount --;
+}
+
+float LLHashTable::loadFactor()
+{
+  float loadFactor;
+  loadFactor = (keyCount / TABLE_SIZE);
+  return loadFactor;
 }
