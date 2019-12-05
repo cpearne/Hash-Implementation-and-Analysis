@@ -12,6 +12,7 @@ class LLHashTable{
     int TABLE_SIZE;
     node* head;
     bool functOne;
+    float keyCount;
 
   public:
     LLHashTable(int tableSize, bool hashFunction);
@@ -23,4 +24,5 @@ class LLHashTable{
     node* searchTable(int key);
     void insertNode(int key);
     void deleteNode(int key);
+    float loadFactor();
 };
