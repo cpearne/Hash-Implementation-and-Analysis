@@ -2,8 +2,10 @@
 #define BST_Hashtable
 #include <iostream>
 using namespace std;
+#include <cmath>
 
-struct TreeNode{
+struct TreeNode
+{
   int key;
   TreeNode *left, *right, *parent;
 };
@@ -13,7 +15,7 @@ class BSTHashTable{
     int TABLE_SIZE;
     TreeNode* root;
     bool functone;
-
+    int elementsCount;
   public:
     BSTHashTable(int tableSize, bool hashFunction);
     ~BSTHashTable();
@@ -23,7 +25,8 @@ class BSTHashTable{
     TreeNode* searchTable(int key);
     void insertNode(int key);
     void deleteNode(int key);
-    int getLoadFactor();
+    float traverseLoadFactor();
+    float varLoadFactor();
 };
 
 #endif
