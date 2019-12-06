@@ -7,10 +7,12 @@ LLHashTable::LLHashTable(int tableSize, bool hashFunction)
 {
   TABLE_SIZE = tableSize;
   functOne = hashFunction;
-  LLHashTable = new node* [TABLE_SIZE];
+  keyCount = 0;
+  loadFactor = 0.0;
+  LLHashtable = new node* [TABLE_SIZE];
   for (int i = 0; i < TABLE_SIZE; i++)
   {
-    LLHashTable[i] = NULL;
+    LLHashtable[i] = nullptr;
   }
 }
 
@@ -18,13 +20,13 @@ LLHashTable::~LLHashTable()
 {
   for (int i = 0; i < TABLE_SIZE; i++)
   {
-    while (LLHashTable[i] != NULL)
+    while (LLHashtable[i] != NULL)
     {
-      deleteNode(LLHashTable[i]->key);
+      deleteNode(LLHashtable[i]->key);
     }
   }
-  delete LLHashTable;
-  LLHashTable = NULL;
+  delete LLHashtable;
+  LLHashtable = NULL;
 }
 
 node* LLHashTable::createNode(int key)
@@ -48,14 +50,13 @@ void LLHashTable::printHashTable()
 {
   for (int i = 0; i < TABLE_SIZE; i++)
   {
-    node* curr = LLHashTable[i];
+    node* curr = LLHashtable[i];
     cout << i << " --> ";
     while(curr)
     {
       cout << curr->key << " ";
       curr = curr->next;
     }
-    cout << endl;
   }
 }
 
@@ -75,8 +76,8 @@ node* LLHashTable::searchTable(int key)
   {
     i = hashFunctTwo(key);
   }
-  node* curr = LLHashTable[i];
-  for (int i = 0; i < TABLE_SIZE; i++)
+  node* curr = LLHashtable[i];
+  while(curr)
   {
     if (curr->key == key)
     {
@@ -96,7 +97,7 @@ node* LLHashTable::searchTable(int key)
  * @param key value of the new node to be inserted
  * @return none
  */
-void LLHashTable::insertNode(node* previous, int key)
+void LLHashTable::insertNode(int key)
 {
   if(searchTable(key) == NULL)
   {
@@ -110,13 +111,13 @@ void LLHashTable::insertNode(node* previous, int key)
       i = hashFunctTwo(key);
     }
     node* newNode = createNode(key);
-    if (LLHashTable[i] == NULL)
+    if (LLHashtable[i] == NULL)
     {
-      LLHashTable[i] = newNode;
+      LLHashtable[i] = newNode;
     }
     else
     {
-      node* curr = LLHashTable[i];
+      node* curr = LLHashtable[i];
       while (curr->next != NULL)
       {
         curr = curr->next;
@@ -124,6 +125,8 @@ void LLHashTable::insertNode(node* previous, int key)
       curr->next = newNode;
     }
   }
+  keyCount++;
+  return;
 }
 
 /*
@@ -144,20 +147,20 @@ void LLHashTable::deleteNode(int key)
     {
       i = hashFunctTwo(key);
     }
-    node* curr = LLHashTable[i];
+    node* curr = LLHashtable[i];
     node* prev = NULL;
     if (curr->key == key)
     {
-      if (curr->next != NULL)
+      if (curr->next)
       {
-        LLHashTable[i] = curr->next;
+        LLHashtable[i] = curr->next;
         delete curr;
-        curr = NULL;
+        curr = nullptr;
       }
       else
       {
-        delete LLHashTable[i];
-        LLHashTable[i] = NULL;
+        delete LLHashtable[i];
+        LLHashtable[i] = nullptr;
       }
     }
     else
@@ -167,7 +170,7 @@ void LLHashTable::deleteNode(int key)
         prev = curr;
         curr = curr->next;
       }
-      if (curr->next != NULL)
+      if (curr->next)
       {
         node* temp = curr;
         prev->next = curr->next;
@@ -178,8 +181,16 @@ void LLHashTable::deleteNode(int key)
       {
         delete curr;
         curr = NULL;
-        prev-next = NULL;
+        prev->next = NULL;
       }
     }
   }
+  keyCount --;
+}
+
+float LLHashTable::LoadFactor()
+{
+  float loadFactor;
+  loadFactor = (float)keyCount / (float)TABLE_SIZE;
+  return loadFactor;
 }
