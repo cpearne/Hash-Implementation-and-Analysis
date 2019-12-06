@@ -2,10 +2,8 @@
 #define BST_Hashtable
 #include <iostream>
 using namespace std;
-#include <cmath>
 
-struct TreeNode
-{
+struct TreeNode{
   int key;
   TreeNode *left, *right, *parent;
 };
@@ -13,9 +11,10 @@ struct TreeNode
 class BSTHashTable{
   private:
     int TABLE_SIZE;
-    TreeNode* root;
-    bool functone;
+    TreeNode* *BSTHashtable;
+    bool functOne;
     int elementsCount;
+
   public:
     BSTHashTable(int tableSize, bool hashFunction);
     ~BSTHashTable();
