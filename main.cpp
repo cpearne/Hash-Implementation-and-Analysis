@@ -115,7 +115,6 @@ int main(int argc, char* argv[])
     number = stoi(line);
     values[i] = number;
     i++;
-    cout << values[i] << endl;
   }
   //Get collision method
   displayMenu();
@@ -153,7 +152,6 @@ int main(int argc, char* argv[])
   {
     cout << "---- Linked List Chaining ----" << endl;
     LLHashTable hashTable(size, hashFunction);
-    hashTable.printHashTable();
     int j = 0;
     int loadFactorNum = 0;
     int time;
