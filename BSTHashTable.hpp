@@ -23,6 +23,7 @@ class BSTHashTable{
     TreeNode* searchTable(int key);
     void insertNode(int key);
     void deleteNode(int key);
+    int getLoadFactor();
 };
 
 #endif
