@@ -3,14 +3,14 @@
 
 using namespace std;
 
-BSTHashTable::BSTHashTable(int tableSize, bool hashFunction);
+BSTHashTable::BSTHashTable(int tableSize, bool hashFunction)
 {
   TABLE_SIZE = tableSize;
-  functone = hashFunction;
-  BSTHashTable = new TreeNode* [tableSize];
-  for(int i = 0; i < tableSize; i++)
+  functOne = hashFunction;
+  BSTHashtable = new TreeNode* [TABLE_SIZE];
+  for(int i = 0; i < TABLE_SIZE; i++)
   {
-    BSTHashTable[i] = NULL;
+    BSTHashtable[i] = NULL;
   }
 }
 
@@ -18,13 +18,13 @@ BSTHashTable::~BSTHashTable()
 {
   for (int i = 0; i < TABLE_SIZE; i++)
   {
-    while (BSTHashTable[i] != NULL)
+    while (BSTHashtable[i] != NULL)
     {
-      deleteNode(BSTHashTable[i]->key);
+      deleteNode(BSTHashtable[i]->key);
     }
   }
-  delete BSTHashTable;
-  BSTHashTable = NULL;
+  delete BSTHashtable;
+  BSTHashtable = NULL;
 }
 
 int BSTHashTable::hashFunctOne(int key)
@@ -55,9 +55,9 @@ void BSTHashTable::printHashTable()
 {
   for(int i = 0; i < TABLE_SIZE; i++)
   {
-    node* curr = BSTHashTable[i];
+    TreeNode* curr = BSTHashtable[i];
     cout << i << " --> ";
-    if(BSTHashTable[i] != NULL)
+    if(BSTHashtable[i] != NULL)
     {
       inOrder(curr);
       cout << endl;
@@ -76,9 +76,9 @@ TreeNode* BSTHashTable::searchTable(int key)
   {
     i = hashFunctTwo(key);
   }
-  if(BSTHashTable[i] != NULL)
+  if(BSTHashtable[i] != NULL)
   {
-    TreeNode* curr = BSTHashTable[i];
+    TreeNode* curr = BSTHashtable[i];
     for (int i = 0; i < TABLE_SIZE; i++)
     {
       if (curr->key == key)
@@ -106,20 +106,20 @@ TreeNode* childInsert(TreeNode* parent, int childKey)
   if(parent == NULL)
   {
     TreeNode* New = new TreeNode;
-    New->key = key;
+    New->key = childKey;
     New->left = NULL;
     New->right = NULL;
     return New;
   }
-  if(key > parent->key)
+  if(childKey > parent->key)
   {
-    TreeNode* rightChild = childInsert(parent->right, key);
+    TreeNode* rightChild = childInsert(parent->right, childKey);
     parent->right = rightChild;
     rightChild->parent = parent;
   }
   else
   {
-    TreeNode* leftChild = childInsert(parent->left, key);
+    TreeNode* leftChild = childInsert(parent->left, childKey);
     parent->left = leftChild;
     leftChild->parent = parent;
   }
@@ -142,13 +142,13 @@ void BSTHashTable::insertNode(int key)
   New->left = NULL;
   New->right = NULL;
 
-  if(BSTHashTable[i] == NULL)
+  if(BSTHashtable[i] == NULL)
   {
-    BSTHashTable[i] = New;
+    BSTHashtable[i] = New;
   }
   else
   {
-    BSTHashTable[i] = childInsert(BSTHashTable[i], key);
+    BSTHashtable[i] = childInsert(BSTHashtable[i], key);
   }
   elementsCount++;
 }
@@ -209,7 +209,7 @@ TreeNode* deleteNodeHelper(TreeNode* curr, int key)
       {
         TreeNode* node3 = minKey(curr->right);
         curr->key = node3->key;
-        curr->right = deleteNodeHelper(root->right, node3->key)
+        curr->right = deleteNodeHelper(curr->right, node3->key);
       }
     }
   }
@@ -230,20 +230,20 @@ void BSTHashTable::deleteNode(int key)
   TreeNode* found = searchTable(key);
   if(found == NULL)
   {
-    cout << key << ": Not Found" << endl;
+    cout << key << " was not found within the hash table" << endl;
   }
   else
   {
-      BSTHashTable[i] = deleteNodeHelper(BSTHashTable[i], key);
+      BSTHashtable[i] = deleteNodeHelper(BSTHashtable[i], key);
   }
-  elementsCount--;
+  elementsCount --;
 }
 
 int elementsCounter(TreeNode* curr)
 {
   if(curr == NULL)
   {
-    return;
+    return 0;
   }
   else
   {
@@ -258,17 +258,18 @@ float BSTHashTable::traverseLoadFactor()
   int total = 0;
   for(int i = 0; i < TABLE_SIZE; i++)
   {
-    TreeNode* curr = BSTHashTable[i];
+    TreeNode* curr = BSTHashtable[i];
     if(curr != NULL)
     {
       total += elementsCounter(curr);
     }
   }
   int loadFactor = total/TABLE_SIZE;
+  cout << "Load Factor: " << loadFactor << endl;
   return loadFactor;
 }
 
 float BSTHashTable::varLoadFactor()
 {
-  return (float)elementsCount/float(TABLE_SIZE);
+  return (float)elementsCount/(float)TABLE_SIZE;
 }
