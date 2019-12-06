@@ -109,12 +109,13 @@ int main(int argc, char* argv[])
   int number;
   //Load in file
   ifstream myFile;
-  myFile.open("dataSetA.csv");
+  myFile.open(argv[1]);
   while (getline(myFile, line, ','))
   {
     number = stoi(line);
     values[i] = number;
     i++;
+    cout << values[i] << endl;
   }
   //Get collision method
   displayMenu();
@@ -217,7 +218,7 @@ int main(int argc, char* argv[])
     int time;
     for (int k = 0; k < count; k++)
       {
-        while(b.getLoadFactor() < loadFactors[loadFactorNum])
+        while(b.varLoadFactor() < loadFactors[loadFactorNum])
         {
           b.insertNode(values[j]);
           j++;
