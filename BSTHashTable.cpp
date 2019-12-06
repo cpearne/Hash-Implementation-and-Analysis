@@ -150,6 +150,7 @@ void BSTHashTable::insertNode(int key)
   {
     BSTHashTable[i] = childInsert(BSTHashTable[i], key);
   }
+  elementsCount++;
 }
 
 TreeNode* minKey(TreeNode* node)
@@ -229,12 +230,13 @@ void BSTHashTable::deleteNode(int key)
   TreeNode* found = searchTable(key);
   if(found == NULL)
   {
-    cout << key << " was not found within the hash table" << endl;
+    cout << key << ": Not Found" << endl;
   }
   else
   {
       BSTHashTable[i] = deleteNodeHelper(BSTHashTable[i], key);
   }
+  elementsCount--;
 }
 
 int elementsCounter(TreeNode* curr)
@@ -251,7 +253,7 @@ int elementsCounter(TreeNode* curr)
   }
 }
 
-int BSTHashTable::getLoadFactor()
+float BSTHashTable::traverseLoadFactor()
 {
   int total = 0;
   for(int i = 0; i < TABLE_SIZE; i++)
@@ -264,4 +266,9 @@ int BSTHashTable::getLoadFactor()
   }
   int loadFactor = total/TABLE_SIZE;
   return loadFactor;
+}
+
+float BSTHashTable::varLoadFactor()
+{
+  return (float)elementsCount/float(TABLE_SIZE);
 }
