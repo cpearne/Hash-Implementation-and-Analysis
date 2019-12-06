@@ -1,5 +1,9 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
+
+#ifndef LLHASHTABLE_H
+#define LLHASHTABLE_H
 
 struct node
 {
@@ -10,17 +14,22 @@ struct node
 class LLHashTable{
   private:
     int TABLE_SIZE;
-    node* head;
+    node* *LLHashtable;
+    node* createNode(int key);
     bool functOne;
+    int keyCount;
+    float loadFactor;
 
   public:
     LLHashTable(int tableSize, bool hashFunction);
     ~LLHashTable();
-    node* createNode(int key);
     int hashFunctOne(int key);
     int hashFunctTwo(int key);
     void printHashTable();
     node* searchTable(int key);
     void insertNode(int key);
     void deleteNode(int key);
+    float LoadFactor();
 };
+
+#endif
