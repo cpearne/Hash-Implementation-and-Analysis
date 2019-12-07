@@ -11,7 +11,7 @@ LPHashTable::LPHashTable(int tableSize, bool hashFunction)
   loadFactor = 0.0;
   for(int i = 0; i < TABLE_SIZE; i++)
   {
-    LPHashTable[i] = -1;
+    LPHashtable[i] = -1;
   }
 }
 
@@ -19,13 +19,13 @@ LPHashTable::~LPHashTable()
 {
   for(int i = 0; i < TABLE_SIZE; i++)
   {
-    while(LPHashTable[i] != NULL)
+    while(LPHashtable[i] != -1)
     {
-      LPHashTable[i] = -1;
+      LPHashtable[i] = -1;
     }
   }
-  delete LPHashTable;
-  LPHashTable = NULL;
+  delete LPHashtable;
+  LPHashtable = NULL;
 }
 
 int LPHashTable::hashFunctOne(int key)
@@ -43,9 +43,9 @@ void LPHashTable::printTable()
   for(int i = 0; i < TABLE_SIZE; i++)
   {
     cout << i << " --> ";
-    if (LPHashTable[i] != -1)
+    if (LPHashtable[i] != -1)
     {
-      cout << LPHashTable[i] << " ";
+      cout << LPHashtable[i] << " ";
     }
   }
 }
@@ -62,31 +62,31 @@ void LPHashTable::insertKey(int key)
     i = hashFunctTwo(key);
   }
   int curr;
-  if(LPHashTable[i] != -1)
+  if(LPHashtable[i] != -1)
   {
-    LPHashTable[i] = key;
+    LPHashtable[i] = key;
   }
   else
   {
     curr = i;
-    while(LPHashTable[i] != -1)
+    while(LPHashtable[i] != -1)
     {
-      if(i = TABLE_SIZE)
+      if(i == TABLE_SIZE)
       {
-        i = 0
+        i = 0;
       }
       else
       {
         i++;
       }
-      if(curr = i)
+      if(curr == i)
       {
         TABLE_SIZE++;
-        LPHashTable[TABLE_SIZE-1]; = key;
+        LPHashtable[TABLE_SIZE-1] = key;
         return;
       }
     }
-    LPHashTable[i] = key;
+    LPHashtable[i] = key;
     elements++;
   }
 }
@@ -103,7 +103,7 @@ int LPHashTable::searchKey(int key)
     i = hashFunctTwo(key);
   }
   int curr = i;
-  while(LPHashTable[i] != key)
+  while(LPHashtable[i] != key)
   {
     if(i == TABLE_SIZE-1)
     {
@@ -113,7 +113,7 @@ int LPHashTable::searchKey(int key)
     {
       i++;
     }
-    if(i = curr)
+    if(i == curr)
     {
       return -1;
     }
@@ -133,9 +133,9 @@ void LPHashTable::deleteKey(int key)
     i = hashFunctTwo(key);
   }
   int curr;
-  if(LPHashTable[i] == key)
+  if(LPHashtable[i] == key)
   {
-    LPHashTable[i] = -1;
+    LPHashtable[i] = -1;
   }
   else
   {
@@ -147,7 +147,7 @@ void LPHashTable::deleteKey(int key)
     }
     else
     {
-      LPHashTable[i] = -1;
+      LPHashtable[i] = -1;
     }
   }
   elements--;
