@@ -10,8 +10,8 @@ using namespace std;
 class LPHashTable{
   private:
       int TABLE_SIZE;
-      int *LPHashTable;
-      bool functnOne;
+      int *LPHashtable;
+      bool functOne;
       int elements;
       float loadFactor;
   public:
