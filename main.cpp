@@ -162,7 +162,17 @@ int main(int argc, char* argv[])
           hashTable.insertNode(values[j]);
           j++;
         }
-        j = 0;
+        //delete 100 values
+        startTime = clock();
+        for (int n = 0; n < 100; n++)
+        {
+          hashTable.deleteNode(values[j]);
+          j--;
+        }
+        endTime = clock();
+        execTime = (double) (endTime - startTime) / CLOCKS_PER_SEC;
+        deleteTime = execTime;
+        deleteData[time] = deleteTime;
         //Insert 100 values
         startTime = clock();
         for (int l = 0; l < 100; l++)
@@ -186,18 +196,6 @@ int main(int argc, char* argv[])
         execTime = (double) (endTime - startTime) / CLOCKS_PER_SEC;
         searchTime = execTime;
         searchData[time] = searchTime;
-        j = 0;
-        //delete 100 values
-        startTime = clock();
-        for (int n = 0; n < 100; n++)
-        {
-          hashTable.deleteNode(values[j]);
-          j++;
-        }
-        endTime = clock();
-        execTime = (double) (endTime - startTime) / CLOCKS_PER_SEC;
-        deleteTime = execTime;
-        deleteData[time] = deleteTime;
         loadFactorNum++;
         time++;
         float avg = (insertTime + searchTime + deleteTime) / 3.0;
@@ -221,7 +219,17 @@ int main(int argc, char* argv[])
           b.insertNode(values[j]);
           j++;
         }
-        j = 0;
+        //delete 100 values
+        startTime = clock();
+        for (int n = 0; n < 100; n++)
+        {
+          b.deleteNode(values[j]);
+          j--;
+        }
+        endTime = clock();
+        execTime = (double) (endTime - startTime) / CLOCKS_PER_SEC;
+        deleteTime = execTime;
+        deleteData[time] = deleteTime;
         //Insert 100 values
         startTime = clock();
         for (int l = 0; l < 100; l++)
@@ -245,18 +253,6 @@ int main(int argc, char* argv[])
         execTime = (double) (endTime - startTime) / CLOCKS_PER_SEC;
         searchTime = execTime;
         searchData[time] = searchTime;
-        j = 0;
-        //delete 100 values
-        startTime = clock();
-        for (int n = 0; n < 100; n++)
-        {
-          b.deleteNode(values[j]);
-          j++;
-        }
-        endTime = clock();
-        execTime = (double) (endTime - startTime) / CLOCKS_PER_SEC;
-        deleteTime = execTime;
-        deleteData[time] = deleteTime;
         loadFactorNum++;
         time++;
         float avg = (insertTime + searchTime + deleteTime) / 3.0;
