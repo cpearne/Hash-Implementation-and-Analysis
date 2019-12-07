@@ -22,7 +22,7 @@ class LPHashTable{
       void printTable();
       void insertKey(int key);
       int searchKey(int key);
-      void deleteK(int key);
+      void deleteKey(int key);
       float getLoadFactor();
 };
 
