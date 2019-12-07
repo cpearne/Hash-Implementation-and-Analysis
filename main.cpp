@@ -4,7 +4,25 @@
 #include <ctime>
 #include "LLHashTable.cpp"
 #include "BSTHashTable.cpp"
+#include "LPHashTable.cpp"
 using namespace std;
+
+void swap(int *a, int *b)
+{
+  int temp = *a;
+  *a = *b;
+  *b = temp;
+}
+
+void randomizeArray(int arr[], int n)
+{
+    srand (time(NULL));
+    for (int i = n-1; i > 0; i--)
+    {
+      int j = rand() % (i + 1);
+      swap(&arr[i], &arr[j]);
+    }
+}
 
 void displayMenu()
 {
@@ -162,6 +180,7 @@ int main(int argc, char* argv[])
           hashTable.insertNode(values[j]);
           j++;
         }
+        randomizeArray(values, j);
         //delete 100 values
         startTime = clock();
         for (int n = 0; n < 100; n++)
@@ -173,6 +192,7 @@ int main(int argc, char* argv[])
         execTime = (double) (endTime - startTime) / CLOCKS_PER_SEC;
         deleteTime = execTime;
         deleteData[time] = deleteTime;
+        randomizeArray(values, j);
         //Insert 100 values
         startTime = clock();
         for (int l = 0; l < 100; l++)
@@ -185,6 +205,7 @@ int main(int argc, char* argv[])
         insertTime = execTime;
         insertData[time] = insertTime;
         j = 0;
+        randomizeArray(values, j);
         //search 100 values
         startTime = clock();
         for (int m = 0; m < 100; m++)
@@ -219,6 +240,7 @@ int main(int argc, char* argv[])
           b.insertNode(values[j]);
           j++;
         }
+        randomizeArray(values, j);
         //delete 100 values
         startTime = clock();
         for (int n = 0; n < 100; n++)
@@ -230,6 +252,7 @@ int main(int argc, char* argv[])
         execTime = (double) (endTime - startTime) / CLOCKS_PER_SEC;
         deleteTime = execTime;
         deleteData[time] = deleteTime;
+        randomizeArray(values, j);
         //Insert 100 values
         startTime = clock();
         for (int l = 0; l < 100; l++)
@@ -242,11 +265,72 @@ int main(int argc, char* argv[])
         insertTime = execTime;
         insertData[time] = insertTime;
         j = 0;
+        randomizeArray(values, j);
         //search 100 values
         startTime = clock();
         for (int m = 0; m < 100; m++)
         {
           b.searchTable(values[j]);
+          j++;
+        }
+        endTime = clock();
+        execTime = (double) (endTime - startTime) / CLOCKS_PER_SEC;
+        searchTime = execTime;
+        searchData[time] = searchTime;
+        loadFactorNum++;
+        time++;
+        float avg = (insertTime + searchTime + deleteTime) / 3.0;
+        cout << "Average time: " << avg << endl;
+      }
+      displayData(hashFunction, method, insertData, searchData, deleteData);
+      return 0;
+  }
+  //Linear Probing
+  if (method == 3)
+  {
+    cout << "---- Linear Probing ----" << endl;
+    LPHashTable l(size, hashFunction);
+    int j = 0;
+    int loadFactorNum = 0;
+    int time;
+    for (int k = 0; k < count; k++)
+      {
+        while(l.getLoadFactor() < loadFactors[loadFactorNum])
+        {
+          l.insertKey(values[j]);
+          j++;
+        }
+        randomizeArray(values, j);
+        //delete 100 values
+        startTime = clock();
+        for (int n = 0; n < 100; n++)
+        {
+          l.deleteKey(values[j]);
+          j--;
+        }
+        endTime = clock();
+        execTime = (double) (endTime - startTime) / CLOCKS_PER_SEC;
+        deleteTime = execTime;
+        deleteData[time] = deleteTime;
+        randomizeArray(values, j);
+        //Insert 100 values
+        startTime = clock();
+        for (int f = 0; f < 100; f++)
+        {
+          l.insertKey(values[j]);
+          j++;
+        }
+        endTime = clock();
+        execTime = (double) (endTime - startTime) / CLOCKS_PER_SEC;
+        insertTime = execTime;
+        insertData[time] = insertTime;
+        j = 0;
+        randomizeArray(values, j);
+        //search 100 values
+        startTime = clock();
+        for (int m = 0; m < 100; m++)
+        {
+          l.searchKey(values[j]);
           j++;
         }
         endTime = clock();
