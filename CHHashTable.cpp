@@ -45,6 +45,25 @@ int CHHashTable:: hashFunctTwo(int key)
   return floor(key/TABLE_SIZE);
 }
 
+void CHHashTable::reHash()
+{
+  reHash++;
+  int newSize = TABLE_SIZE+1;
+
+  int *tempCHHashTable1 = new int CHHashTable[newSize];
+  int *tempCHHashTable2 = new int CHHashTable[newSize];
+  for(int i = 0; i < newSize; i++)
+	{
+		tempCHHashTable1[i] = CHTable1[i];
+    tempCHHashTable2[i] = CHTable2[i];
+	}
+  tempCHHashTable[newSize - 1] = -1;
+  tempCHHashTable2[newSize - 1] = -1;
+	delete[] CHHashTable;
+	CHHashTable = tempLCHashTable;
+	TABLE_SIZE = newSize;
+}
+
 void CHHashTable::insertKey(int key)
 {
   int i = hashFunctOne(key);
