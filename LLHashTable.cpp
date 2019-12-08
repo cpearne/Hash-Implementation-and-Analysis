@@ -100,31 +100,34 @@ node* LLHashTable::searchTable(int key)
  */
 void LLHashTable::insertNode(int key)
 {
-  int i;
-  if (functOne)
+  if(searchTable(key) == NULL)
   {
-    i = hashFunctOne(key);
-  }
-  else
-  {
-    i = hashFunctTwo(key);
-  }
-  node* newNode = createNode(key);
-  if (LLHashtable[i] == NULL)
-  {
-    LLHashtable[i] = newNode;
-  }
-  else
-  {
-    node* curr = LLHashtable[i];
-    while (curr->next != NULL)
+    int i;
+    if (functOne)
     {
-      curr = curr->next;
+      i = hashFunctOne(key);
     }
-    curr->next = newNode;
+    else
+    {
+      i = hashFunctTwo(key);
+    }
+    node* newNode = createNode(key);
+    if (LLHashtable[i] == NULL)
+    {
+      LLHashtable[i] = newNode;
+    }
+    else
+    {
+      node* curr = LLHashtable[i];
+      while (curr->next != NULL)
+      {
+        curr = curr->next;
+      }
+      curr->next = newNode;
+    }
+    keyCount++;
+    return;
   }
-  keyCount++;
-  return;
 }
 
 /*
