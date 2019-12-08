@@ -46,7 +46,7 @@ CHHashTable::~CHHashTable()
 }
 
 /*
- * Purpose: Function to obtain the index if the first hash Fucntion is used
+ * Purpose: Function to obtain the index if the first hash Function is used
  * @param key of the node that is in the first hash table
  * @return key % TABLE_SIZE which is h(x)
  */
@@ -56,8 +56,8 @@ int CHHashTable::hashFunctOne(int key)
 }
 
 /*
- * Purpose: Function to obtain the index if the second hash Fucntion is used
- * @param key of the node that is in the first hash table
+ * Purpose: Function to obtain the index if the second hash Function is used
+ * @param key of the node that is in the second hash table
  * @return floor(key % TABLE_SIZE) which is h'(x)
  */
 int CHHashTable:: hashFunctTwo(int key)
