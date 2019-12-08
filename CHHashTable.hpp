@@ -11,18 +11,23 @@ class CHHashTable
     int TABLE_SIZE;
     int *CHTable1;
     int *CHTable2;
-    bool functOne;
+    int table;
     int elements;
     float loadFactor;
+    int rehash;
 
   public:
-    CHHashTable(int tableSize, bool hashFunction);
+    CHHashTable(int tableSize);
     ~CHHashTable();
-    int hashFunctOne();
-    int hashFunctTwo();
+    int hashFunctOne(int key);
+    int hashFunctTwo(int key);
     void printTable();
     void insertKey(int key);
     int searchKey(int key);
     void deleteKey(int key);
     float getLoadFactor();
-}
+    void reHash();
+    int getRehash();
+};
+
+#endif
