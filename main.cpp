@@ -8,6 +8,10 @@
 #include "CHHashTable.cpp"
 using namespace std;
 
+/*
+ * Purpose: Swap function to swap values in an array
+ * @param the integers to be swapped
+ */
 void swap(int *a, int *b)
 {
   int temp = *a;
@@ -15,8 +19,14 @@ void swap(int *a, int *b)
   *b = temp;
 }
 
+/*
+ * Purpose: Function to randomize values in an array
+ * @param the array and the array size
+ */
 void randomizeArray(int arr[], int n)
 {
+    //for loop to traverse array
+    //randomly choose two values and swap them
     srand (time(NULL));
     for (int i = n-1; i > 0; i--)
     {
@@ -25,6 +35,9 @@ void randomizeArray(int arr[], int n)
     }
 }
 
+/*
+ * Purpose: Display a menu to choose which collision method to use
+ */
 void displayMenu()
 {
   cout << "---- Choose Collision Method ----" << endl;
@@ -35,6 +48,9 @@ void displayMenu()
   cout << "---------------------" << endl;
 }
 
+/*
+ * Purpose: Display a menu to choose which hash function to use
+ */
 void displayHashFunction()
 {
   cout << "---- Choose Hash Function ----" << endl;
@@ -43,6 +59,9 @@ void displayHashFunction()
   cout << "---------------------" << endl;
 }
 
+/*
+ * Purpose: function that displays the data for the given collision method
+ */
 void displayData(bool hashFunction, int method, float insertData[], float searchData[], float deleteData[])
 {
   cout << "---- Method and Actions ----" << endl;
@@ -79,6 +98,7 @@ void displayData(bool hashFunction, int method, float insertData[], float search
   cout << endl;
   cout << "---- Data Obtained ----" << endl;
   cout << "Insert Data: ";
+  //printing out the execution time of each load factor for insert
   for (int i = 0; i < 6; i++)
   {
     cout << insertData[i];
@@ -88,6 +108,7 @@ void displayData(bool hashFunction, int method, float insertData[], float search
     }
   }
   cout << endl;
+  //printing out the execution time of each load factor for search
   cout << "Search Data: ";
   for (int i = 0; i < 6; i++)
   {
@@ -98,6 +119,7 @@ void displayData(bool hashFunction, int method, float insertData[], float search
     }
   }
   cout << endl;
+  //printing out the execution time of each load factor for delete
   cout << "Delete Data: ";
   for (int i = 0; i < 6; i++)
   {
@@ -110,6 +132,7 @@ void displayData(bool hashFunction, int method, float insertData[], float search
 }
 int main(int argc, char* argv[])
 {
+  //used for timing
   int startTime, endTime;
   double execTime;
   double insertTime;
@@ -117,13 +140,16 @@ int main(int argc, char* argv[])
   double deleteTime;
   bool hashFunction;
   int size = 10009;
+  //array storing each load factor to test
   float loadFactors[6] = {0.1, 0.2, 0.5, 0.7, 0.9, 1};
+  //arrays storing execution times at each load Factor
+  //for each operation
   float insertData[6];
   float searchData[6];
   float deleteData[6];
   string line;
   int count = 6;
-  int values[40000];
+  int values[50000];
   int i = 0;
   int number;
   //Load in file
@@ -171,16 +197,19 @@ int main(int argc, char* argv[])
   {
     cout << "---- Linked List Chaining ----" << endl;
     LLHashTable hashTable(size, hashFunction);
+    //j is used to represent the index position within the array of data
     int j = 0;
     int loadFactorNum = 0;
     int time;
     for (int k = 0; k < count; k++)
       {
+        //set the load factor
         while(hashTable.LoadFactor() < loadFactors[loadFactorNum])
         {
           hashTable.insertNode(values[j]);
           j++;
         }
+        //after each operation, randomize the array to get new values
         randomizeArray(values, j);
         //delete 100 values
         startTime = clock();
