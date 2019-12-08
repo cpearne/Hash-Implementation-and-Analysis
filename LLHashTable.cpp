@@ -51,8 +51,8 @@ node* LLHashTable::createNode(int key)
 }
 
 /*
- * Purpose: Function to obtain the index if the first hash Fucntion is used
- * @param key of the node that is in the first hash table
+ * Purpose: Function to obtain the index if the first hash Function is used
+ * @param int key value
  * @return key % TABLE_SIZE which is h(x)
  */
 int LLHashTable::hashFunctOne(int key)
@@ -61,8 +61,8 @@ int LLHashTable::hashFunctOne(int key)
 }
 
 /*
- * Purpose: Function to obtain the index if the second hash Fucntion is used
- * @param key of the node that is in the first hash table
+ * Purpose: Function to obtain the index if the second hash Function is used
+ * @param int key valye
  * @return floor(key % TABLE_SIZE) which is h'(x)
  */
 int LLHashTable::hashFunctTwo(int key)
