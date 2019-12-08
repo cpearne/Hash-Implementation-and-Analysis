@@ -79,7 +79,7 @@ TreeNode* BSTHashTable::searchTable(int key)
   if(BSTHashtable[i] != NULL)
   {
     TreeNode* curr = BSTHashtable[i];
-    for (int i = 0; i < TABLE_SIZE; i++)
+    while (curr != NULL)
     {
       if (curr->key == key)
       {
@@ -128,29 +128,32 @@ TreeNode* childInsert(TreeNode* parent, int childKey)
 
 void BSTHashTable::insertNode(int key)
 {
-  int i;
-  if(functOne)
+  if (searchTable(key) == NULL)
   {
-    i = hashFunctOne(key);
-  }
-  else
-  {
-    i = hashFunctTwo(key);
-  }
-  TreeNode* New = new TreeNode;
-  New->key = key;
-  New->left = NULL;
-  New->right = NULL;
+    int i;
+    if(functOne)
+    {
+      i = hashFunctOne(key);
+    }
+    else
+    {
+      i = hashFunctTwo(key);
+    }
+    TreeNode* New = new TreeNode;
+    New->key = key;
+    New->left = NULL;
+    New->right = NULL;
 
-  if(BSTHashtable[i] == NULL)
-  {
-    BSTHashtable[i] = New;
+    if(BSTHashtable[i] == NULL)
+    {
+      BSTHashtable[i] = New;
+    }
+    else
+    {
+      BSTHashtable[i] = childInsert(BSTHashtable[i], key);
+    }
+    elementsCount++;
   }
-  else
-  {
-    BSTHashtable[i] = childInsert(BSTHashtable[i], key);
-  }
-  elementsCount++;
 }
 
 TreeNode* minKey(TreeNode* node)
@@ -228,11 +231,7 @@ void BSTHashTable::deleteNode(int key)
     i = hashFunctTwo(key);
   }
   TreeNode* found = searchTable(key);
-  if(found == NULL)
-  {
-    cout << key << " was not found within the hash table" << endl;
-  }
-  else
+  if (found != NULL)
   {
       BSTHashtable[i] = deleteNodeHelper(BSTHashtable[i], key);
   }
