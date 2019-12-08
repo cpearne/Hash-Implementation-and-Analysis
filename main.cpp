@@ -5,6 +5,7 @@
 #include "LLHashTable.cpp"
 #include "BSTHashTable.cpp"
 #include "LPHashTable.cpp"
+#include "CHHashTable.cpp"
 using namespace std;
 
 void swap(int *a, int *b)
@@ -343,6 +344,68 @@ int main(int argc, char* argv[])
         cout << "Average time: " << avg << endl;
       }
       displayData(hashFunction, method, insertData, searchData, deleteData);
+      return 0;
+  }
+  //Cuckoo Hashing
+  if (method == 4)
+  {
+    cout << "---- Cuckoo Hashing ----" << endl;
+    CHHashTable c(size);
+    int j = 0;
+    int loadFactorNum = 0;
+    int time;
+    for (int k = 0; k < count; k++)
+      {
+        while(c.getLoadFactor() < loadFactors[loadFactorNum])
+        {
+          c.insertKey(values[j]);
+          j++;
+        }
+        randomizeArray(values, j);
+        //delete 100 values
+        startTime = clock();
+        for (int n = 0; n < 100; n++)
+        {
+          c.deleteKey(values[j]);
+          j--;
+        }
+        endTime = clock();
+        execTime = (double) (endTime - startTime) / CLOCKS_PER_SEC;
+        deleteTime = execTime;
+        deleteData[time] = deleteTime;
+        randomizeArray(values, j);
+        //Insert 100 values
+        startTime = clock();
+        for (int f = 0; f < 100; f++)
+        {
+          c.insertKey(values[j]);
+          j++;
+        }
+        endTime = clock();
+        execTime = (double) (endTime - startTime) / CLOCKS_PER_SEC;
+        insertTime = execTime;
+        insertData[time] = insertTime;
+        j = 0;
+        randomizeArray(values, j);
+        //search 100 values
+        startTime = clock();
+        for (int m = 0; m < 100; m++)
+        {
+          c.searchKey(values[j]);
+          j++;
+        }
+        endTime = clock();
+        execTime = (double) (endTime - startTime) / CLOCKS_PER_SEC;
+        searchTime = execTime;
+        searchData[time] = searchTime;
+        loadFactorNum++;
+        time++;
+        float avg = (insertTime + searchTime + deleteTime) / 3.0;
+        cout << "Average time: " << avg << endl;
+      }
+      displayData(hashFunction, method, insertData, searchData, deleteData);
+      cout << endl;
+      c.getRehash();
       return 0;
   }
 }
