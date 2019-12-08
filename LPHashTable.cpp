@@ -9,6 +9,7 @@ LPHashTable::LPHashTable(int tableSize, bool hashFunction)
   functOne = hashFunction;
   elements = 0;
   loadFactor = 0.0;
+  LPHashtable = new int [TABLE_SIZE];
   for(int i = 0; i < TABLE_SIZE; i++)
   {
     LPHashtable[i] = -1;
@@ -47,46 +48,50 @@ void LPHashTable::printTable()
     {
       cout << LPHashtable[i] << " ";
     }
+      cout << endl;
   }
 }
 
 void LPHashTable::insertKey(int key)
 {
-  int i;
-  if(functOne)
+  if (searchKey(key) == -1)
   {
-    i = hashFunctOne(key);
-  }
-  else
-  {
-    i = hashFunctTwo(key);
-  }
-  int curr;
-  if(LPHashtable[i] != -1)
-  {
-    LPHashtable[i] = key;
-  }
-  else
-  {
-    curr = i;
-    while(LPHashtable[i] != -1)
+    int i;
+    if(functOne)
     {
-      if(i == TABLE_SIZE)
-      {
-        i = 0;
-      }
-      else
-      {
-        i++;
-      }
-      if(curr == i)
-      {
-        TABLE_SIZE++;
-        LPHashtable[TABLE_SIZE-1] = key;
-        return;
-      }
+      i = hashFunctOne(key);
     }
-    LPHashtable[i] = key;
+    else
+    {
+      i = hashFunctTwo(key);
+    }
+    int curr;
+    if(LPHashtable[i] == -1)
+    {
+      LPHashtable[i] = key;
+    }
+    else
+    {
+      curr = i;
+      while(LPHashtable[i] != -1)
+      {
+        if(i == TABLE_SIZE)
+        {
+          i = 0;
+        }
+        else
+        {
+          i++;
+        }
+        if(i == curr)
+        {
+          TABLE_SIZE++;
+          LPHashtable[TABLE_SIZE-1] = key;
+          return;
+        }
+      }
+      LPHashtable[i] = key;
+    }
     elements++;
   }
 }
@@ -113,7 +118,7 @@ int LPHashTable::searchKey(int key)
     {
       i++;
     }
-    if(i == curr)
+    if(curr == i)
     {
       return -1;
     }
