@@ -81,7 +81,7 @@ void inOrder(TreeNode* curr)
 *           calling helper to traverse from root node to all child nodes
 *  Used for debugging and given as a menu option
 */
-void BSTHashTable::printHashTable()
+void BSTHashTable::printTable()
 {
   // for loop to traverse hash table indices
   for(int i = 0; i < TABLE_SIZE; i++)
@@ -104,7 +104,7 @@ void BSTHashTable::printHashTable()
 *  Since Binary Tree is balanced we can search/traverse it like a Binary Search Tree
 *  @return node within search function, otherwise return null at the end of the function
 */
-TreeNode* BSTHashTable::searchTable(int key)
+TreeNode* BSTHashTable::searchNode(int key)
 {
   int i;
   // h(x)
@@ -186,7 +186,7 @@ TreeNode* childInsert(TreeNode* parent, int childKey)
 void BSTHashTable::insertNode(int key)
 {
   // search to make sure there are no duplicate key values in table
-  if (searchTable(key) == NULL)
+  if (searchNode(key) == NULL)
   {
     int i;
     // h(x)
@@ -317,7 +317,7 @@ void BSTHashTable::deleteNode(int key)
     i = hashFunctTwo(key);
   }
   // Check to see if search function found the key
-  TreeNode* found = searchTable(key);
+  TreeNode* found = searchNode(key);
   // If node isn't null then helper functions are called to properly delete node
   if (found != NULL)
   {
@@ -370,7 +370,7 @@ float BSTHashTable::traverseLoadFactor()
 *  Purpose: Function to obtain the load factor
 *  @return float load factor
 */
-float BSTHashTable::varLoadFactor()
+float BSTHashTable::getLoadFactor()
 {
   return (float)elementsCount/(float)TABLE_SIZE;
 }
