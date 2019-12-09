@@ -94,7 +94,7 @@ void LLHashTable::printHashTable()
  * @param key value of node in LL
  * @return pointer to node of key, or NULL if not found
  */
-node* LLHashTable::searchTable(int key)
+node* LLHashTable::searchNode(int key)
 {
   int i;
   //determine which hash function to use
@@ -130,7 +130,7 @@ node* LLHashTable::searchTable(int key)
 void LLHashTable::insertNode(int key)
 {
   //only insert if key is not a duplicate
-  if(searchTable(key) == NULL)
+  if(searchNode(key) == NULL)
   {
     int i;
     //determine which hash function to use
@@ -172,7 +172,7 @@ void LLHashTable::insertNode(int key)
 void LLHashTable::deleteNode(int key)
 {
   //check to see that the given key exists in the LL
-  if (searchTable(key))
+  if (searchNode(key))
   {
     int i;
     //determine which hash function to use
@@ -237,7 +237,7 @@ void LLHashTable::deleteNode(int key)
  * Purpose: Function to obtain the Load Factor
  * @return Load Factor as a float
  */
-float LLHashTable::LoadFactor()
+float LLHashTable::getLoadFactor()
 {
   float loadFactor;
   loadFactor = (float)keyCount / (float)TABLE_SIZE;
