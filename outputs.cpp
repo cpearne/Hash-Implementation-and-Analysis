@@ -110,3 +110,32 @@ DATA SET C:
     Search Data: 1e-06, 2e-06, 2e-06, 1e-06, 1e-06, 1e-06
     Delete Data: 0.003338, 0.003171, 0.002631, 0.00254, 0.002541, 0.002207
     Number of times Rehashed: 11
+      
+      
+HASH FUNCTION 2:
+  LINKED LIST DATA SET A:
+    Insert Data: 1.6e-05, 1.8e-05, 2e-05, 3.1e-05, 3.1e-05, 1.4e-05
+    Search Data: 5e-06, 6e-06, 6e-06, 1.1e-05, 1.5e-05, 3e-06
+    Delete Data: 2.2e-05, 2.2e-05, 2.3e-05, 4.7e-05, 5.8e-05, 1.6e-05
+  LINKED LIST DATA SET C:
+    Insert Data: 5.6e-05, 5.1e-05, 2.4e-05, 7.1e-05, 1.6e-05, 1.7e-05
+    Search Data: 4e-06, 5e-06, 8e-06, 2.5e-05, 5e-06, 6e-06
+    Delete Data: 4.5e-05, 6.2e-05, 3e-05, 7e-05, 1.7e-05, 1.7e-05
+      
+  BST DATA SET A:
+    Insert Data: 1.7e-05, 2.2e-05, 1.9e-05, 2.1e-05, 2.2e-05, 2.4e-05
+    Search Data: 4e-06, 4e-06, 5e-06, 5e-06, 5e-06, 6e-06
+    Delete Data: 1.9e-05, 1.9e-05, 1.5e-05, 1.5e-05, 1.6e-05, 1.6e-05
+  BST DATA SET C:
+    Insert Data: 1.9e-05, 1.9e-05, 2.3e-05, 2.7e-05, 2.8e-05, 3e-05
+    Search Data: 4e-06, 3e-06, 6e-06, 7e-06, 7e-06, 8e-06
+    Delete Data: 2e-05, 1.6e-05, 1.7e-05, 1.7e-05, 2e-05, 2e-05
+      
+  LINEAR PROBING DATA SET A:
+    Insert Data: 0.001979, 0.001985, 0.002005, 0.001978, 0.001977, 0.002066
+    Search Data: 3e-06, 2e-06, 3e-06, 5e-06, 3e-06, 2.1e-05
+    Delete Data: 2.4e-05, 2.5e-05, 2.5e-05, 2.5e-05, 2.7e-05, 6.3e-05
+  LINEAR PROBING DATA SET C:
+    Insert Data: 0.001964, 0.002018, 0.002015, 0.002084, 0.002151, 0.002176
+    Search Data: 2e-06, 4e-06, 3.3e-05, 0.000126, 0.000206, 0.000244
+    Delete Data: 2.4e-05, 2.5e-05, 7.2e-05, 0.000153, 0.000262, 0.000258
