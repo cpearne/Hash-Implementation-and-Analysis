@@ -20,12 +20,12 @@ class BSTHashTable{
     ~BSTHashTable();
     int hashFunctOne(int key);
     int hashFunctTwo(int key);
-    void printHashTable();
-    TreeNode* searchTable(int key);
+    void printTable();
+    TreeNode* searchNode(int key);
     void insertNode(int key);
     void deleteNode(int key);
     float traverseLoadFactor();
-    float varLoadFactor();
+    float getLoadFactor();
 };
 
 #endif
