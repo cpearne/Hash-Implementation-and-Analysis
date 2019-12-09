@@ -26,10 +26,10 @@ class LLHashTable{
     int hashFunctOne(int key);
     int hashFunctTwo(int key);
     void printHashTable();
-    node* searchTable(int key);
+    node* searchNode(int key);
     void insertNode(int key);
     void deleteNode(int key);
-    float LoadFactor();
+    float getLoadFactor();
 };
 
 #endif
