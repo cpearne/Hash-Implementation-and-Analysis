@@ -204,7 +204,7 @@ int main(int argc, char* argv[])
     for (int k = 0; k < count; k++)
       {
         //set the load factor
-        while(hashTable.LoadFactor() < loadFactors[loadFactorNum])
+        while(hashTable.getLoadFactor() < loadFactors[loadFactorNum])
         {
           hashTable.insertNode(values[j]);
           j++;
@@ -240,7 +240,7 @@ int main(int argc, char* argv[])
         startTime = clock();
         for (int m = 0; m < 100; m++)
         {
-          hashTable.searchTable(values[j]);
+          hashTable.searchNode(values[j]);
           j++;
         }
         endTime = clock();
@@ -265,7 +265,7 @@ int main(int argc, char* argv[])
     int time;
     for (int k = 0; k < count; k++)
       {
-        while(b.varLoadFactor() < loadFactors[loadFactorNum])
+        while(b.getLoadFactor() < loadFactors[loadFactorNum])
         {
           b.insertNode(values[j]);
           j++;
@@ -300,7 +300,7 @@ int main(int argc, char* argv[])
         startTime = clock();
         for (int m = 0; m < 100; m++)
         {
-          b.searchTable(values[j]);
+          b.searchNode(values[j]);
           j++;
         }
         endTime = clock();
